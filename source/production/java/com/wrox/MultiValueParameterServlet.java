@@ -48,5 +48,29 @@ public class MultiValueParameterServlet extends HttpServlet {
 		  .append("</body>\r\n")
 		  .append("</html>\r\n");
 	}
-
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	throws ServletException,IOException{
+		String[] fruits = request.getParameterValues("fruit");
+		PrintWriter pw = response.getWriter();
+		pw.append("<!DOCTYPE html>\r\n")
+		  .append("<html>\r\n")
+		  .append("    <head>\r\n")
+		  .append("        <title>Hello,user application</title>\r\n")
+		  .append("    </head>\r\n")
+		  .append("    <body>\r\n")
+		  .append("        <h2>Your Selections</h2>\r\n");
+		  if(fruits == null){
+			  pw.append("                    You did not select any fruits\r\n");
+		  }else{
+		      pw.append("<ul>\r\n");
+		      for(String fruit:fruits){
+		    	  pw.append("<li>").append(fruit).append("</li>\r\n");
+		      }
+		      pw.append("</ul>\r\n");
+		  }
+		  pw.append("</body>\r\n");
+		  pw.append("</html>\r\n");
+	}
 }
